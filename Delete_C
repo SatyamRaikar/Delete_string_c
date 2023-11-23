@@ -1,0 +1,50 @@
+# include <stdio.h>
+
+int main() {
+    char str[80], str2[80];
+    char *s, *q, *p;
+    int i;
+
+    printf("\nEnter a sentence not more than 80 chars long:\n");
+    gets(str);
+
+    s = str;   
+    p = str2;   
+
+    while (*s) {
+        q = s;
+
+        if (*s == 't' || *s == 'T') {
+            s++;
+
+            if (*s == 'h') {
+                s++;
+
+                if (*s == 'e') {
+                    /* Skip 'the' */
+                    ;
+                } else {
+                    /* Copy characters other than 'the' */
+                    for (i = 0; i <= 2; i++)
+                        *p++ = *q++;
+                }
+            } else {
+                /* Copy 't' and go back to the previous character */
+                *p++ = *q++;
+                s--;
+            }
+        } else {
+            /* Copy other characters */
+            *p++ = *s;
+        }
+
+        s++;
+    }
+
+    *p = '\0'; // Null-terminate the new string
+
+    printf("\n\nSentence after deleting all occurrences of 'the' is:\n");
+    puts(str2); // Output the modified sentence
+
+    return 0;
+}
